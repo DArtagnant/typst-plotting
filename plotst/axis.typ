@@ -108,7 +108,7 @@
 // returns the expected need of space as a (width, height) array
 // axis: the axis
 // style: styling
-#let measure_axis(axis, style) = {
+#let measure_axis(axis) = {
   let invert_markings = 1
   if axis.location == "right" {
     invert_markings = -1
@@ -177,7 +177,7 @@
       // Places the title
       //place(dy: -50%, rotate(-90deg, axis.title)) // TODO
       context {
-        let a = measure_axis(axis, style).at(0)
+        let a = measure_axis(axis).at(0)
         if axis.location == "left" {
           place(dy: pos.at(1) - length / 2, dx: -length/2 - a, rotate(-90deg, origin: center + top, box(width: length, height:0pt, align(center+top, axis.title))))
         } else {
@@ -224,10 +224,8 @@
       if axis.location == "bottom" {
         place(dx: pos.at(0), dy: 3pt, align(top + center, box(width: length, height: 0pt, [\ #axis.title])))
       } else {
-        style(style => {
-          let a = measure_axis(axis, style).at(1)
-          layout(size => place(dy: -size.height - a, align(top + center, box(width: length, height: 0pt, [#axis.title]))))
-        })
+        let a = measure_axis(axis).at(1)
+        layout(size => place(dy: -size.height - a, align(top + center, box(width: length, height: 0pt, [#axis.title]))))
       }
       
       // Draws step markings

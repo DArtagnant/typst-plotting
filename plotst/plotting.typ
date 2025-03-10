@@ -11,7 +11,7 @@
         let offset_bottom = 0pt
         // Draw coordinate system
         for axis in plot.axes {
-          let (w,h) = measure_axis(axis, style)
+          let (w,h) = measure_axis(axis)
           if(axis.location == "left") {
             offset_left += w
           }
